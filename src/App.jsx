@@ -1,13 +1,16 @@
-import ContactFormComponent from "./Components/ContactFormComponent";
+import ContactForm from "./Components/ContactForm";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
     <>
       <main>
-        <ContactFormComponent />
+        <ContactForm />
       </main>
 
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }

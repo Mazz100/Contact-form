@@ -12,6 +12,12 @@ $input-border: hsl(0, 0%, 50%);
   justify-content: $justify;
 }
 
+//react dom element
+#root {
+  @include flexDisplay(column, center, center);
+  min-height: 100vh;
+}
+
 body {
   font-family: "Karla", sans-serif;
   background-color: $body-bg-color;
@@ -36,6 +42,7 @@ main {
 // Personal information
 .input-text-label {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .input-text-label::after {
@@ -67,9 +74,7 @@ main {
   width: 100%;
   cursor: pointer;
   border: $input-border 1px solid;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @include flexDisplay(row, center, start);
   margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 6px;
@@ -86,7 +91,7 @@ main {
   border-radius: 6px;
   border: solid 1px $input-border;
   width: 100%;
-  overflow: scroll;
+  resize: none;
 }
 
 // Checkbox field
@@ -120,3 +125,45 @@ main {
   border-radius: 8px;
   cursor: pointer;
 }
+
+//Footer
+.attribution {
+  $attribution-link: hsl(169, 82%, 27%);
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem;
+
+  a {
+    color: $attribution-link;
+  }
+}
+
+// ============= media query breakpoints ==================
+/* @media (min-width: 48rem) and (max-width: 80rem) {
+  main {
+    max-width: 32rem;
+  }
+} // Tablet screen size */
+
+@media (min-width: 80rem) {
+  main {
+    max-width: none;
+    @include flexDisplay(column, center, center);
+    flex: 1;
+  }
+
+  .desktop-text-label-wrapper {
+    @include flexDisplay(row, center, center);
+    gap: 1rem;
+  }
+
+  .query-wrapper {
+    @include flexDisplay(row, center, center);
+    gap: 1rem;
+  }
+
+  .attribution {
+    display: block;
+  }
+} // Desktop screen size

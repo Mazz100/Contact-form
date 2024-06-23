@@ -97,6 +97,14 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 body {
   font-family: "Karla", sans-serif;
   background-color: hsl(148, 38%, 91%);
@@ -122,6 +130,7 @@ main {
 
 .input-text-label {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .input-text-label::after {
@@ -155,6 +164,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
   margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 6px;
@@ -170,7 +180,7 @@ main {
   border-radius: 6px;
   border: solid 1px hsl(0, 0%, 50%);
   width: 100%;
-  overflow: scroll;
+  resize: none;
 }
 
 .consent-wrapper {
@@ -204,4 +214,47 @@ main {
   width: 100%;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.attribution {
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem;
+}
+.attribution a {
+  color: hsl(169, 82%, 27%);
+}
+
+/* @media (min-width: 48rem) and (max-width: 80rem) {
+  main {
+    max-width: 32rem;
+  }
+} // Tablet screen size */
+@media (min-width: 80rem) {
+  main {
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  .desktop-text-label-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .query-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .attribution {
+    display: block;
+  }
 }/*# sourceMappingURL=style.css.map */
