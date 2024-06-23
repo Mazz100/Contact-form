@@ -1,0 +1,122 @@
+@use "reset.scss";
+
+//Variables
+$body-bg-color: hsl(148, 38%, 91%);
+$interactive-color: hsl(169, 82%, 27%);
+$input-border: hsl(0, 0%, 50%);
+
+@mixin flexDisplay($direction, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  background-color: $body-bg-color;
+
+  @include flexDisplay(column, center, center);
+}
+
+main {
+  max-width: 21rem;
+}
+
+.header-h1 {
+  margin-bottom: 1rem;
+}
+
+.contact-form {
+  background-color: #fff;
+  padding: 1.2rem;
+  border-radius: 12px;
+}
+
+// Personal information
+.input-text-label {
+  margin-bottom: 2rem;
+}
+
+.input-text-label::after {
+  content: "*";
+  margin-inline: 0.3rem;
+  color: $interactive-color;
+}
+
+.text-input {
+  padding: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 6px;
+  border: solid 1px $input-border;
+  width: 100%;
+}
+
+//Query type information
+.query-text {
+  margin-block: 0.8rem;
+}
+
+.query-text::after {
+  content: "*";
+  margin-inline: 0.3rem;
+  color: $interactive-color;
+}
+
+.query-label {
+  width: 100%;
+  cursor: pointer;
+  border: $input-border 1px solid;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border-radius: 6px;
+}
+
+.query-input {
+  margin-right: 0.6rem;
+}
+
+//Message field
+.message-text {
+  padding: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 6px;
+  border: solid 1px $input-border;
+  width: 100%;
+  overflow: scroll;
+}
+
+// Checkbox field
+.consent-wrapper {
+  @include flexDisplay(row, center, center);
+  margin-block: 1.5rem;
+}
+
+.input-checkbox-label {
+  width: 100%;
+  font-size: 0.925rem;
+  font-weight: 500;
+}
+
+.input-checkbox-label::after {
+  content: "*";
+  margin-inline: 0.5rem;
+  color: $interactive-color;
+}
+
+.checkbox-input {
+  margin-right: 1rem;
+}
+
+// Button submit form
+.submit-button {
+  color: white;
+  background-color: $interactive-color;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}

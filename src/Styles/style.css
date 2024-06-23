@@ -1,0 +1,207 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: none;
+  background-color: inherit;
+  padding: 0;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  background-color: hsl(148, 38%, 91%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  max-width: 21rem;
+}
+
+.header-h1 {
+  margin-bottom: 1rem;
+}
+
+.contact-form {
+  background-color: #fff;
+  padding: 1.2rem;
+  border-radius: 12px;
+}
+
+.input-text-label {
+  margin-bottom: 2rem;
+}
+
+.input-text-label::after {
+  content: "*";
+  margin-inline: 0.3rem;
+  color: hsl(169, 82%, 27%);
+}
+
+.text-input {
+  padding: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 6px;
+  border: solid 1px hsl(0, 0%, 50%);
+  width: 100%;
+}
+
+.query-text {
+  margin-block: 0.8rem;
+}
+
+.query-text::after {
+  content: "*";
+  margin-inline: 0.3rem;
+  color: hsl(169, 82%, 27%);
+}
+
+.query-label {
+  width: 100%;
+  cursor: pointer;
+  border: hsl(0, 0%, 50%) 1px solid;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border-radius: 6px;
+}
+
+.query-input {
+  margin-right: 0.6rem;
+}
+
+.message-text {
+  padding: 0.4rem;
+  margin-block: 0.5rem;
+  border-radius: 6px;
+  border: solid 1px hsl(0, 0%, 50%);
+  width: 100%;
+  overflow: scroll;
+}
+
+.consent-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-block: 1.5rem;
+}
+
+.input-checkbox-label {
+  width: 100%;
+  font-size: 0.925rem;
+  font-weight: 500;
+}
+
+.input-checkbox-label::after {
+  content: "*";
+  margin-inline: 0.5rem;
+  color: hsl(169, 82%, 27%);
+}
+
+.checkbox-input {
+  margin-right: 1rem;
+}
+
+.submit-button {
+  color: white;
+  background-color: hsl(169, 82%, 27%);
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */
