@@ -3,7 +3,9 @@
 //Variables
 $body-bg-color: hsl(148, 38%, 91%);
 $interactive-color: hsl(169, 82%, 27%);
+$interactive-hover-color: hsl(171, 83%, 14%);
 $input-border: hsl(0, 0%, 50%);
+$error-text: hsl(0, 66%, 54%);
 
 @mixin flexDisplay($direction, $align, $justify) {
   display: flex;
@@ -57,6 +59,20 @@ main {
   border-radius: 6px;
   border: solid 1px $input-border;
   width: 100%;
+  transition: border-color 150ms ease-in, box-shadow 200ms ease;
+}
+
+.text-input:hover {
+  border-color: $interactive-color;
+}
+
+.text-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $interactive-color;
+}
+
+.text-input:valid {
+  border-color: $interactive-color;
 }
 
 //Query type information
@@ -78,10 +94,71 @@ main {
   margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 6px;
+  transition: border-color 150ms ease-in;
+}
+
+.query-label:hover {
+  border-color: $interactive-color;
 }
 
 .query-input {
+  margin: 0;
   margin-right: 0.6rem;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  appearance: none;
+  display: grid;
+  place-content: center;
+}
+
+.query-input:focus {
+  outline: none;
+}
+
+//Storing input width and height for scalability of checked visuals
+$radio-border-w: 20px;
+$radio-border-h: 20px;
+.query-input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: $radio-border-w;
+  height: $radio-border-h;
+  border: $input-border 1px solid;
+  transition: border-color 200ms ease-in;
+}
+
+.query-input:hover::before {
+  border-color: $interactive-color;
+}
+
+.query-input:focus::before {
+  outline: $interactive-color 2px solid;
+  outline-offset: 2px;
+}
+
+.query-input::after {
+  position: absolute;
+  content: "";
+  top: 4px;
+  left: 4px;
+  width: calc($radio-border-w - 8px);
+  height: calc($radio-border-h - 8px);
+  background-color: $interactive-color;
+  border-radius: 50%;
+  transition: transform 100ms ease-in;
+  transform: scale(0);
+}
+
+.query-input:checked::before {
+  border-color: $interactive-color;
+}
+
+.query-input:checked::after {
+  transform: scale(1);
 }
 
 //Message field
@@ -92,18 +169,36 @@ main {
   border: solid 1px $input-border;
   width: 100%;
   resize: none;
+  transition: border-color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+.message-text:hover {
+  border-color: $interactive-color;
+}
+
+.message-text:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px $interactive-color;
+}
+
+.message-text:valid {
+  border-color: $interactive-color;
 }
 
 // Checkbox field
 .consent-wrapper {
   @include flexDisplay(row, center, center);
-  margin-block: 1.5rem;
+
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .input-checkbox-label {
   width: 100%;
   font-size: 0.925rem;
   font-weight: 500;
+
+  cursor: pointer;
 }
 
 .input-checkbox-label::after {
@@ -113,10 +208,63 @@ main {
 }
 
 .checkbox-input {
+  margin: 0;
   margin-right: 1rem;
+  position: relative;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox-input:focus {
+  outline: none;
+}
+
+.checkbox-input::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  border: $input-border 1px solid;
+}
+
+.checkbox-input:focus::before {
+  outline: $interactive-color 2px solid;
+  outline-offset: 3px;
+}
+
+.checkbox-input:hover::before {
+  border-color: $interactive-color;
+}
+
+.checkbox-input::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: url(../assets/images/icon-checkbox-check.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+
+.checkbox-input:checked::after {
+  opacity: 1;
 }
 
 // Button submit form
+.button-wrapper {
+  margin-top: 1rem;
+}
+
 .submit-button {
   color: white;
   background-color: $interactive-color;
@@ -124,6 +272,24 @@ main {
   width: 100%;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 200ms ease-in;
+}
+
+.submit-button:hover {
+  background-color: $interactive-hover-color;
+}
+
+.submit-button:focus {
+  outline: $interactive-color 2px solid;
+  outline-offset: 3px;
+}
+
+.error-text {
+  display: flex;
+  width: 100%;
+  font-size: 0.875rem;
+  color: $error-text;
+  margin: 0;
 }
 
 //Footer
