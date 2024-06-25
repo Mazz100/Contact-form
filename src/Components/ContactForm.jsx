@@ -177,7 +177,7 @@ const ContactFormComponent = () => {
         <span className="error-text">This field is required</span>
       )}
 
-      <div className="consent-wrapper">
+      <div className="checkbox-wrapper">
         <input
           className="checkbox-input"
           type="checkbox"
@@ -186,14 +186,16 @@ const ContactFormComponent = () => {
           onChange={(e) => setConsentCheck(e.target.checked)}
           checked={consentCheck}
         />
+
         <label className="input-checkbox-label" htmlFor="consent checkbox">
           I consent to being contacted by the team
         </label>
       </div>
+
       {/*error text element for consent checkbox*/}
       {consentError && (
         <span className="error-text">
-          To submit this form, please consent to being contacted{" "}
+          To submit this form, please consent to being contacted
         </span>
       )}
 

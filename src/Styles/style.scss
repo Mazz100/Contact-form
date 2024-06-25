@@ -135,7 +135,7 @@ $radio-border-h: 20px;
   border-color: $interactive-color;
 }
 
-.query-input:focus::before {
+.query-input:focus-visible::before {
   outline: $interactive-color 2px solid;
   outline-offset: 2px;
 }
@@ -186,18 +186,15 @@ $radio-border-h: 20px;
 }
 
 // Checkbox field
-.consent-wrapper {
-  @include flexDisplay(row, center, center);
-
+.checkbox-wrapper {
+  @include flexDisplay(row, center, start);
   margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .input-checkbox-label {
-  width: 100%;
   font-size: 0.925rem;
   font-weight: 500;
-
   cursor: pointer;
 }
 
@@ -214,8 +211,6 @@ $radio-border-h: 20px;
   appearance: none;
   width: 20px;
   height: 20px;
-  display: grid;
-  place-content: center;
 }
 
 .checkbox-input:focus {
@@ -249,7 +244,7 @@ $radio-border-h: 20px;
   left: 0;
   width: 20px;
   height: 20px;
-  background: url(../assets/images/icon-checkbox-check.svg);
+  background-image: url(../assets/images/icon-checkbox-check.svg);
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0;
@@ -279,7 +274,7 @@ $radio-border-h: 20px;
   background-color: $interactive-hover-color;
 }
 
-.submit-button:focus {
+.submit-button:focus-visible {
   outline: $interactive-color 2px solid;
   outline-offset: 3px;
 }
