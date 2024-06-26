@@ -248,14 +248,28 @@ main {
   transform: scale(1);
 }
 
+.query-label:has(.query-input:checked) {
+  background-color: hsl(148, 38%, 91%);
+  border-color: hsl(169, 82%, 27%);
+}
+
 .message-text {
   padding: 0.4rem;
-  margin-block: 0.5rem;
+  margin-top: 0.5rem;
   border-radius: 6px;
   border: solid 1px hsl(0, 0%, 50%);
   width: 100%;
   resize: none;
   transition: border-color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+.messag-length-wrapper {
+  width: 100%;
+  text-align: right;
+}
+.messag-length-wrapper span {
+  font-size: 0.925rem;
+  font-style: italic;
 }
 
 .message-text:hover {
@@ -372,7 +386,7 @@ main {
   display: flex;
   width: 100%;
   font-size: 0.875rem;
-  color: hsl(0, 66%, 54%);
+  color: #d73c3c;
   margin: 0;
 }
 
@@ -386,11 +400,11 @@ main {
   color: hsl(169, 82%, 27%);
 }
 
-/* @media (min-width: 48rem) and (max-width: 80rem) {
+@media (min-width: 48rem) and (max-width: 80rem) {
   main {
     max-width: 32rem;
   }
-} // Tablet screen size */
+}
 @media (min-width: 80rem) {
   main {
     max-width: none;

@@ -5,7 +5,7 @@ $body-bg-color: hsl(148, 38%, 91%);
 $interactive-color: hsl(169, 82%, 27%);
 $interactive-hover-color: hsl(171, 83%, 14%);
 $input-border: hsl(0, 0%, 50%);
-$error-text: hsl(0, 66%, 54%);
+$error-text: #d73c3c;
 
 @mixin flexDisplay($direction, $align, $justify) {
   display: flex;
@@ -161,15 +161,29 @@ $radio-border-h: 20px;
   transform: scale(1);
 }
 
+.query-label:has(.query-input:checked) {
+  background-color: $body-bg-color;
+  border-color: $interactive-color;
+}
+
 //Message field
 .message-text {
   padding: 0.4rem;
-  margin-block: 0.5rem;
+  margin-top: 0.5rem;
   border-radius: 6px;
   border: solid 1px $input-border;
   width: 100%;
   resize: none;
   transition: border-color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+.messag-length-wrapper {
+  width: 100%;
+  text-align: right;
+  span {
+    font-size: 0.925rem;
+    font-style: italic;
+  }
 }
 
 .message-text:hover {
@@ -301,11 +315,11 @@ $radio-border-h: 20px;
 }
 
 // ============= media query breakpoints ==================
-/* @media (min-width: 48rem) and (max-width: 80rem) {
+@media (min-width: 48rem) and (max-width: 80rem) {
   main {
     max-width: 32rem;
   }
-} // Tablet screen size */
+} // Tablet screen size
 
 @media (min-width: 80rem) {
   main {

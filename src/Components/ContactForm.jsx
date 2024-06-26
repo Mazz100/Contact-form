@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SubmitButton from "./SubmitButton";
 
 const ContactFormComponent = () => {
@@ -8,6 +8,10 @@ const ContactFormComponent = () => {
   const [message, setMessage] = useState("");
   const [selectedQuery, setSelectedQuery] = useState("");
   const [consentCheck, setConsentCheck] = useState(false);
+
+  //Message text letters length
+  const [minText, setMinText] = useState(0);
+  const [maxText, setMaxText] = useState(500);
 
   //Query values
   const queries = [
@@ -35,6 +39,13 @@ const ContactFormComponent = () => {
   const handleEmail = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
+
+    let emailReg =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (emailReg.test(email)) {
+      setEmailError(false);
+    }
   };
   const handleMessage = (e) => {
     const messageValue = e.target.value;
@@ -44,15 +55,44 @@ const ContactFormComponent = () => {
   const handleSelectedQuery = (e) => {
     const queryValue = e.target.value;
     setSelectedQuery(queryValue);
-    console.log(selectedQuery);
   };
+
+  const handleConsentCheck = (e) => {
+    const checkValue = e.target.checked;
+    setConsentCheck(checkValue);
+  };
+
+  useEffect(() => {
+    if (firstName.trim() != "") {
+      setFirstNameError(false);
+    }
+    if (lastName.trim() != "") {
+      setLastNameError(false);
+    }
+    if (message.trim() != "") {
+      setMessageError(false);
+    }
+    if (selectedQuery != "") {
+      setQueryError(false);
+    }
+    if (consentCheck) {
+      setConsentError(false);
+    }
+
+    //Update message length and display for user
+    setMinText(message.length);
+  }, [firstName, lastName, message, selectedQuery, consentCheck, minText]);
 
   const onSubmitValidation = (e) => {
     e.preventDefault();
 
     const invalidFirstName = !firstName || firstName.trim() == "";
     const invalidLastName = !lastName || lastName.trim() == "";
-    const invalidEmail = !email || email.trim() == "";
+
+    let emailReg =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const invalidEmail = !emailReg.test(email);
+
     const invalidMessage = !message || message.trim() == "";
     const invalidSelectedQuery = !selectedQuery;
     const invalidCheckedConsent = !consentCheck;
@@ -63,22 +103,6 @@ const ContactFormComponent = () => {
     setQueryError(invalidSelectedQuery);
     setConsentError(invalidCheckedConsent);
   };
-
-  useEffect(() => {
-    if (firstName.length > 0 && firstName.trim() != "") {
-      setFirstNameError(false);
-    } else if (lastName.length > 0 && lastName.trim() != "") {
-      setLastNameError(false);
-    } else if (email.length > 0 && email.trim() != "") {
-      setEmailError(false);
-    } else if (message.length > 0 && message.trim() != "") {
-      setMessageError(false);
-    } else if (selectedQuery != "") {
-      setQueryError(false);
-    } else {
-      setConsentError(false);
-    }
-  }, [firstName, lastName, message, email, selectedQuery, consentCheck]);
 
   return (
     <form className="contact-form">
@@ -91,12 +115,12 @@ const ContactFormComponent = () => {
 
           <input
             className="text-input"
+            style={firstNameError ? { borderColor: "red" } : null}
             type="text"
             name="firstname"
             value={firstName}
             onChange={handleFirstName}
             id="firstname"
-            required
           />
 
           {firstNameError && (
@@ -109,12 +133,12 @@ const ContactFormComponent = () => {
           </label>
           <input
             className="text-input"
+            style={lastNameError ? { borderColor: "#d73c3c" } : null}
             type="text"
             name="lastname"
             value={lastName}
             onChange={handleLastName}
             id="lastname"
-            required
           />
 
           {lastNameError && (
@@ -128,12 +152,12 @@ const ContactFormComponent = () => {
       </label>
       <input
         className="text-input"
+        style={emailError ? { borderColor: "#d73c3c" } : null}
         type="email"
         name="emailaddress"
         value={email}
         onChange={handleEmail}
         id="emailaddress"
-        required
       />
 
       {emailError && (
@@ -151,7 +175,6 @@ const ContactFormComponent = () => {
               name="query"
               value={query.value}
               onChange={handleSelectedQuery}
-              required
             />
             {query.label}
           </label>
@@ -165,13 +188,20 @@ const ContactFormComponent = () => {
       </label>
       <textarea
         className="message-text"
+        style={messageError ? { borderColor: "#d73c3c" } : null}
         name="Message"
         id="message"
         value={message}
         onChange={handleMessage}
         aria-label="contact message text"
-        required
+        minLength={minText}
+        maxLength={maxText}
       ></textarea>
+
+      {/*Displaying min/max letters for user*/}
+      <div className="messag-length-wrapper">
+        {minText > 0 && <span>{`${minText} / ${maxText}`}</span>}
+      </div>
 
       {messageError && (
         <span className="error-text">This field is required</span>
@@ -182,12 +212,12 @@ const ContactFormComponent = () => {
           className="checkbox-input"
           type="checkbox"
           name="consent-agreement"
-          id="consent checkbox"
-          onChange={(e) => setConsentCheck(e.target.checked)}
-          checked={consentCheck}
+          id="consent-checkbox"
+          onChange={handleConsentCheck}
+          defaultChecked={false}
         />
 
-        <label className="input-checkbox-label" htmlFor="consent checkbox">
+        <label className="input-checkbox-label" htmlFor="consent-checkbox">
           I consent to being contacted by the team
         </label>
       </div>
