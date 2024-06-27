@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SubmitButton from "./SubmitButton";
 
-const ContactFormComponent = () => {
+const ContactForm = ({ setSuccess }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -86,14 +86,12 @@ const ContactFormComponent = () => {
   const onSubmitValidation = (e) => {
     e.preventDefault();
 
-    const invalidFirstName = !firstName || firstName.trim() == "";
-    const invalidLastName = !lastName || lastName.trim() == "";
-
+    const invalidFirstName = !firstName;
+    const invalidLastName = !lastName;
     let emailReg =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const invalidEmail = !emailReg.test(email);
-
-    const invalidMessage = !message || message.trim() == "";
+    const invalidMessage = !message;
     const invalidSelectedQuery = !selectedQuery;
     const invalidCheckedConsent = !consentCheck;
     setFirstNameError(invalidFirstName);
@@ -102,11 +100,26 @@ const ContactFormComponent = () => {
     setMessageError(invalidMessage);
     setQueryError(invalidSelectedQuery);
     setConsentError(invalidCheckedConsent);
+
+    if (
+      firstName &&
+      lastName &&
+      emailReg.test(email) &&
+      message &&
+      selectedQuery &&
+      consentCheck
+    ) {
+      setSuccess(true);
+    }
   };
 
   return (
-    <form className="contact-form">
-      <h1 className="header-h1">Contact Us</h1>
+    <form className="contact-form" onSubmit={onSubmitValidation} noValidate>
+      <div className="header-wrapper">
+        <h1 className="header-h1">Contact Us</h1>
+        <span>Asterisk indicates required</span>
+      </div>
+
       <div className="desktop-text-label-wrapper">
         <div>
           <label className="input-text-label" htmlFor="firstname">
@@ -121,6 +134,7 @@ const ContactFormComponent = () => {
             value={firstName}
             onChange={handleFirstName}
             id="firstname"
+            required
           />
 
           {firstNameError && (
@@ -139,6 +153,7 @@ const ContactFormComponent = () => {
             value={lastName}
             onChange={handleLastName}
             id="lastname"
+            required
           />
 
           {lastNameError && (
@@ -158,6 +173,7 @@ const ContactFormComponent = () => {
         value={email}
         onChange={handleEmail}
         id="emailaddress"
+        required
       />
 
       {emailError && (
@@ -175,12 +191,13 @@ const ContactFormComponent = () => {
               name="query"
               value={query.value}
               onChange={handleSelectedQuery}
+              required
             />
             {query.label}
           </label>
         ))}
       </div>
-      {/* Query error text element*/}
+
       {queryError && <span className="error-text">Please select a query</span>}
 
       <label className="input-text-label" htmlFor="message">
@@ -196,6 +213,7 @@ const ContactFormComponent = () => {
         aria-label="contact message text"
         minLength={minText}
         maxLength={maxText}
+        required
       ></textarea>
 
       {/*Displaying min/max letters for user*/}
@@ -215,6 +233,7 @@ const ContactFormComponent = () => {
           id="consent-checkbox"
           onChange={handleConsentCheck}
           defaultChecked={false}
+          required
         />
 
         <label className="input-checkbox-label" htmlFor="consent-checkbox">
@@ -222,16 +241,15 @@ const ContactFormComponent = () => {
         </label>
       </div>
 
-      {/*error text element for consent checkbox*/}
       {consentError && (
         <span className="error-text">
           To submit this form, please consent to being contacted
         </span>
       )}
 
-      <SubmitButton validate={onSubmitValidation} />
+      <SubmitButton />
     </form>
   );
 };
 
-export default ContactFormComponent;
+export default ContactForm;

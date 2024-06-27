@@ -29,10 +29,25 @@ body {
 
 main {
   max-width: 21rem;
+  @include flexDisplay(column, center, center);
+}
+
+.header-wrapper {
+  @include flexDisplay(column, start, space-between);
+
+  span {
+    margin-bottom: 0.5rem;
+  }
+
+  span::after {
+    content: "(*)";
+    color: $interactive-color;
+    text-overflow: ellipsis;
+  }
 }
 
 .header-h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .contact-form {
@@ -68,7 +83,7 @@ main {
 
 .text-input:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px $interactive-color;
+  box-shadow: 0 0 0 3px $interactive-color;
 }
 
 .text-input:valid {
@@ -173,8 +188,21 @@ $radio-border-h: 20px;
   border-radius: 6px;
   border: solid 1px $input-border;
   width: 100%;
-  resize: none;
+  resize: vertical;
   transition: border-color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+.message-text:hover {
+  border-color: $interactive-color;
+}
+
+.message-text:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px $interactive-color;
+}
+
+.message-text:valid {
+  border-color: $interactive-color;
 }
 
 .messag-length-wrapper {
@@ -184,19 +212,6 @@ $radio-border-h: 20px;
     font-size: 0.925rem;
     font-style: italic;
   }
-}
-
-.message-text:hover {
-  border-color: $interactive-color;
-}
-
-.message-text:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px $interactive-color;
-}
-
-.message-text:valid {
-  border-color: $interactive-color;
 }
 
 // Checkbox field
@@ -242,7 +257,7 @@ $radio-border-h: 20px;
   border: $input-border 1px solid;
 }
 
-.checkbox-input:focus::before {
+.checkbox-input:focus-visible::before {
   outline: $interactive-color 2px solid;
   outline-offset: 3px;
 }
@@ -301,6 +316,48 @@ $radio-border-h: 20px;
   margin: 0;
 }
 
+//Success message visuals
+.success-wrapper {
+  $success-bg: hsl(171, 83%, 14%);
+  background-color: $success-bg;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+
+  animation: successAnim 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+  .success-header {
+    @include flexDisplay(row, center, start);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    h2 {
+      font-size: 1rem;
+    }
+  }
+
+  .success-text {
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+}
+
+@keyframes successAnim {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 //Footer
 .attribution {
   $attribution-link: hsl(169, 82%, 27%);
@@ -317,7 +374,12 @@ $radio-border-h: 20px;
 // ============= media query breakpoints ==================
 @media (min-width: 48rem) and (max-width: 80rem) {
   main {
-    max-width: 32rem;
+    max-width: 40rem;
+  }
+
+  .header-wrapper {
+    flex-direction: row;
+    gap: 2rem;
   }
 } // Tablet screen size
 
@@ -326,6 +388,11 @@ $radio-border-h: 20px;
     max-width: none;
     @include flexDisplay(column, center, center);
     flex: 1;
+  }
+
+  .header-wrapper {
+    flex-direction: row;
+    gap: 0;
   }
 
   .desktop-text-label-wrapper {

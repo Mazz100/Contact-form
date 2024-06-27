@@ -116,10 +116,29 @@ body {
 
 main {
   max-width: 21rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+}
+.header-wrapper span {
+  margin-bottom: 0.5rem;
+}
+.header-wrapper span::after {
+  content: "(*)";
+  color: hsl(169, 82%, 27%);
+  text-overflow: ellipsis;
 }
 
 .header-h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .contact-form {
@@ -154,7 +173,7 @@ main {
 
 .text-input:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px hsl(169, 82%, 27%);
+  box-shadow: 0 0 0 3px hsl(169, 82%, 27%);
 }
 
 .text-input:valid {
@@ -259,8 +278,21 @@ main {
   border-radius: 6px;
   border: solid 1px hsl(0, 0%, 50%);
   width: 100%;
-  resize: none;
+  resize: vertical;
   transition: border-color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+.message-text:hover {
+  border-color: hsl(169, 82%, 27%);
+}
+
+.message-text:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(169, 82%, 27%);
+}
+
+.message-text:valid {
+  border-color: hsl(169, 82%, 27%);
 }
 
 .messag-length-wrapper {
@@ -270,19 +302,6 @@ main {
 .messag-length-wrapper span {
   font-size: 0.925rem;
   font-style: italic;
-}
-
-.message-text:hover {
-  border-color: hsl(169, 82%, 27%);
-}
-
-.message-text:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px hsl(169, 82%, 27%);
-}
-
-.message-text:valid {
-  border-color: hsl(169, 82%, 27%);
 }
 
 .checkbox-wrapper {
@@ -332,7 +351,7 @@ main {
   border: hsl(0, 0%, 50%) 1px solid;
 }
 
-.checkbox-input:focus::before {
+.checkbox-input:focus-visible::before {
   outline: hsl(169, 82%, 27%) 2px solid;
   outline-offset: 3px;
 }
@@ -390,6 +409,43 @@ main {
   margin: 0;
 }
 
+.success-wrapper {
+  background-color: hsl(171, 83%, 14%);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  animation: successAnim 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+.success-wrapper .success-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.success-wrapper .success-header svg {
+  width: 1rem;
+  height: 1rem;
+}
+.success-wrapper .success-header h2 {
+  font-size: 1rem;
+}
+.success-wrapper .success-text {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+@keyframes successAnim {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .attribution {
   display: none;
   width: 100%;
@@ -402,7 +458,11 @@ main {
 
 @media (min-width: 48rem) and (max-width: 80rem) {
   main {
-    max-width: 32rem;
+    max-width: 40rem;
+  }
+  .header-wrapper {
+    flex-direction: row;
+    gap: 2rem;
   }
 }
 @media (min-width: 80rem) {
@@ -413,6 +473,10 @@ main {
     align-items: center;
     justify-content: center;
     flex: 1;
+  }
+  .header-wrapper {
+    flex-direction: row;
+    gap: 0;
   }
   .desktop-text-label-wrapper {
     display: flex;
