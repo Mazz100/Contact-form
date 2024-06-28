@@ -10,6 +10,7 @@ const SuccessMessage = () => {
           height="21"
           fill="none"
           viewBox="0 0 20 21"
+          aria-hidden={true}
         >
           <path
             fill="#fff"

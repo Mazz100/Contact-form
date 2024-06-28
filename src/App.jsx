@@ -8,7 +8,11 @@ function App() {
 
   return (
     <>
-      <main>
+      <main
+        aria-live="polite"
+        aria-atomic={false}
+        aria-relevant="text additions"
+      >
         {success && <SuccessMessage />}
         <ContactForm success={success} setSuccess={setSuccess} />
       </main>

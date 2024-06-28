@@ -5,7 +5,7 @@ $body-bg-color: hsl(148, 38%, 91%);
 $interactive-color: hsl(169, 82%, 27%);
 $interactive-hover-color: hsl(171, 83%, 14%);
 $input-border: hsl(0, 0%, 50%);
-$error-text: #d73c3c;
+$error-text: hsl(0, 66%, 54%);
 
 @mixin flexDisplay($direction, $align, $justify) {
   display: flex;
@@ -62,10 +62,11 @@ main {
   width: 100%;
 }
 
-.input-text-label::after {
-  content: "*";
-  margin-inline: 0.3rem;
-  color: $interactive-color;
+.asterisk {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .text-input {
@@ -93,12 +94,6 @@ main {
 //Query type information
 .query-text {
   margin-block: 0.8rem;
-}
-
-.query-text::after {
-  content: "*";
-  margin-inline: 0.3rem;
-  color: $interactive-color;
 }
 
 .query-label {
@@ -225,12 +220,6 @@ $radio-border-h: 20px;
   font-size: 0.925rem;
   font-weight: 500;
   cursor: pointer;
-}
-
-.input-checkbox-label::after {
-  content: "*";
-  margin-inline: 0.5rem;
-  color: $interactive-color;
 }
 
 .checkbox-input {
@@ -368,6 +357,7 @@ $radio-border-h: 20px;
 
   a {
     color: $attribution-link;
+    font-weight: 700;
   }
 }
 
