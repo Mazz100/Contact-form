@@ -18,6 +18,7 @@ $error-text: hsl(0, 66%, 54%);
 #root {
   @include flexDisplay(column, center, center);
   min-height: 100vh;
+  width: 100%;
 }
 
 body {
@@ -37,12 +38,6 @@ main {
 
   span {
     margin-bottom: 0.5rem;
-  }
-
-  span::after {
-    content: "(*)";
-    color: $interactive-color;
-    text-overflow: ellipsis;
   }
 }
 
@@ -92,7 +87,13 @@ main {
 }
 
 //Query type information
-.query-text {
+.query-fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.query-legend {
   margin-block: 0.8rem;
 }
 
@@ -145,7 +146,7 @@ $radio-border-h: 20px;
   border-color: $interactive-color;
 }
 
-.query-input:focus-visible::before {
+.query-input:focus::before {
   outline: $interactive-color 2px solid;
   outline-offset: 2px;
 }
@@ -317,20 +318,11 @@ $radio-border-h: 20px;
 
   .success-header {
     @include flexDisplay(row, center, start);
-    gap: 0.5rem;
+    gap: 1rem;
     margin-bottom: 0.5rem;
-
-    svg {
-      width: 1rem;
-      height: 1rem;
-    }
-    h2 {
-      font-size: 1rem;
-    }
   }
 
   .success-text {
-    font-size: 0.75rem;
     opacity: 0.7;
   }
 }
@@ -348,12 +340,16 @@ $radio-border-h: 20px;
 }
 
 //Footer
+footer {
+  width: 100%;
+}
+
 .attribution {
   $attribution-link: hsl(169, 82%, 27%);
   display: none;
-  width: 100%;
   text-align: center;
   padding: 0.6rem;
+  background: white;
 
   a {
     color: $attribution-link;
@@ -367,6 +363,10 @@ $radio-border-h: 20px;
     max-width: 40rem;
   }
 
+  .contact-form {
+    padding: 2rem;
+  }
+
   .header-wrapper {
     flex-direction: row;
     gap: 2rem;
@@ -378,6 +378,10 @@ $radio-border-h: 20px;
     max-width: none;
     @include flexDisplay(column, center, center);
     flex: 1;
+  }
+
+  .contact-form {
+    padding: 2rem;
   }
 
   .header-wrapper {

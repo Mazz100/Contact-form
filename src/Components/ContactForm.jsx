@@ -138,10 +138,10 @@ const ContactForm = ({ setSuccess }) => {
     }
 
     if (
-      firstName &&
-      lastName &&
+      !invalidFirstName &&
+      !invalidLastName &&
       emailReg.test(email) &&
-      message &&
+      !invalidMessage &&
       selectedQuery &&
       consentCheck
     ) {
@@ -153,7 +153,22 @@ const ContactForm = ({ setSuccess }) => {
     <form className="contact-form" onSubmit={onSubmitValidation} noValidate>
       <div className="header-wrapper">
         <h1 className="header-h1">Contact Us</h1>
-        <span>Asterisk indicates required</span>
+        <span>
+          Asterisk indicates required
+          <svg
+            className="asterisk"
+            aria-hidden={true}
+            enableBackground="new 0 0 128 128"
+            viewBox="0 0 128 128"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+          >
+            <path
+              d="m50.92 67.87-21.05-6.07c-1.04-.3-1.62-1.4-1.29-2.43l3.38-10.39c.34-1.04 1.49-1.59 2.51-1.19l20.78 8.04c1.29.5 2.66-.49 2.6-1.87l-1.04-23.96c-.05-1.09.82-2 1.91-2h11.05c1.09 0 1.96.91 1.91 2l-1.05 24.48c-.06 1.38 1.32 2.36 2.6 1.87l20.34-7.87c1.03-.4 2.18.16 2.52 1.21l3.34 10.62c.32 1.03-.27 2.12-1.3 2.41l-21.48 6.09c-1.29.37-1.81 1.92-1.01 2.99l13.96 18.58c.64.85.46 2.06-.4 2.69l-8.96 6.55c-.9.66-2.16.41-2.75-.53l-12.44-19.89c-.75-1.19-2.48-1.2-3.23-.02l-12.27 19.23c-.59.92-1.82 1.16-2.71.54l-9.01-6.29c-.89-.62-1.09-1.86-.43-2.73l14.5-19.06c.83-1.07.32-2.62-.98-3z"
+              fill="#0c7d69"
+            />
+          </svg>
+        </span>
       </div>
 
       <div className="desktop-text-label-wrapper">
@@ -162,6 +177,7 @@ const ContactForm = ({ setSuccess }) => {
             First Name
             <svg
               className="asterisk"
+              aria-hidden={true}
               enableBackground="new 0 0 128 128"
               viewBox="0 0 128 128"
               xmlns="http://www.w3.org/2000/svg"
@@ -200,6 +216,7 @@ const ContactForm = ({ setSuccess }) => {
             Last Name
             <svg
               className="asterisk"
+              aria-hidden={true}
               enableBackground="new 0 0 128 128"
               viewBox="0 0 128 128"
               xmlns="http://www.w3.org/2000/svg"
@@ -235,6 +252,7 @@ const ContactForm = ({ setSuccess }) => {
         Email Address
         <svg
           className="asterisk"
+          aria-hidden={true}
           enableBackground="new 0 0 128 128"
           viewBox="0 0 128 128"
           xmlns="http://www.w3.org/2000/svg"
@@ -264,39 +282,41 @@ const ContactForm = ({ setSuccess }) => {
         <span className="error-text">Please enter a valid email address</span>
       )}
 
-      <p className="query-text" id="query-type">
-        Query Type
-        <svg
-          className="asterisk"
-          enableBackground="new 0 0 128 128"
-          viewBox="0 0 128 128"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-        >
-          <path
-            d="m50.92 67.87-21.05-6.07c-1.04-.3-1.62-1.4-1.29-2.43l3.38-10.39c.34-1.04 1.49-1.59 2.51-1.19l20.78 8.04c1.29.5 2.66-.49 2.6-1.87l-1.04-23.96c-.05-1.09.82-2 1.91-2h11.05c1.09 0 1.96.91 1.91 2l-1.05 24.48c-.06 1.38 1.32 2.36 2.6 1.87l20.34-7.87c1.03-.4 2.18.16 2.52 1.21l3.34 10.62c.32 1.03-.27 2.12-1.3 2.41l-21.48 6.09c-1.29.37-1.81 1.92-1.01 2.99l13.96 18.58c.64.85.46 2.06-.4 2.69l-8.96 6.55c-.9.66-2.16.41-2.75-.53l-12.44-19.89c-.75-1.19-2.48-1.2-3.23-.02l-12.27 19.23c-.59.92-1.82 1.16-2.71.54l-9.01-6.29c-.89-.62-1.09-1.86-.43-2.73l14.5-19.06c.83-1.07.32-2.62-.98-3z"
-            fill="#0c7d69"
-          />
-        </svg>
-      </p>
-
-      <div className="query-wrapper">
-        {queries.map((query) => (
-          <label key={query.id} className="query-label">
-            <input
-              className="query-input"
-              ref={queryRef}
-              type="radio"
-              name="query"
-              value={query.value}
-              onChange={handleSelectedQuery}
-              required
-              aria-describedby="query-type"
+      <fieldset className="query-fieldset">
+        <legend className="query-legend">
+          Query Type
+          <svg
+            className="asterisk"
+            aria-hidden={true}
+            enableBackground="new 0 0 128 128"
+            viewBox="0 0 128 128"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+          >
+            <path
+              d="m50.92 67.87-21.05-6.07c-1.04-.3-1.62-1.4-1.29-2.43l3.38-10.39c.34-1.04 1.49-1.59 2.51-1.19l20.78 8.04c1.29.5 2.66-.49 2.6-1.87l-1.04-23.96c-.05-1.09.82-2 1.91-2h11.05c1.09 0 1.96.91 1.91 2l-1.05 24.48c-.06 1.38 1.32 2.36 2.6 1.87l20.34-7.87c1.03-.4 2.18.16 2.52 1.21l3.34 10.62c.32 1.03-.27 2.12-1.3 2.41l-21.48 6.09c-1.29.37-1.81 1.92-1.01 2.99l13.96 18.58c.64.85.46 2.06-.4 2.69l-8.96 6.55c-.9.66-2.16.41-2.75-.53l-12.44-19.89c-.75-1.19-2.48-1.2-3.23-.02l-12.27 19.23c-.59.92-1.82 1.16-2.71.54l-9.01-6.29c-.89-.62-1.09-1.86-.43-2.73l14.5-19.06c.83-1.07.32-2.62-.98-3z"
+              fill="#0c7d69"
             />
-            {query.label}
-          </label>
-        ))}
-      </div>
+          </svg>
+        </legend>
+
+        <div className="query-wrapper">
+          {queries.map((query) => (
+            <label key={query.id} className="query-label">
+              <input
+                className="query-input"
+                ref={queryRef}
+                type="radio"
+                name="query"
+                value={query.value}
+                onChange={handleSelectedQuery}
+                required
+              />
+              {query.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       {queryError && <span className="error-text">Please select a query</span>}
 
@@ -304,6 +324,7 @@ const ContactForm = ({ setSuccess }) => {
         Message
         <svg
           className="asterisk"
+          aria-hidden={true}
           enableBackground="new 0 0 128 128"
           viewBox="0 0 128 128"
           xmlns="http://www.w3.org/2000/svg"
@@ -323,7 +344,6 @@ const ContactForm = ({ setSuccess }) => {
         id="message"
         value={message}
         onChange={handleMessage}
-        aria-label="contact message text"
         minLength={minText}
         maxLength={maxText}
         required
@@ -356,6 +376,7 @@ const ContactForm = ({ setSuccess }) => {
           I consent to being contacted by the team
           <svg
             className="asterisk"
+            aria-hidden={true}
             enableBackground="new 0 0 128 128"
             viewBox="0 0 128 128"
             xmlns="http://www.w3.org/2000/svg"
